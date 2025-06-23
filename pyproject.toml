@@ -1,0 +1,104 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name="wg_lazy"
+authors = [{ name="Seedform", email="contact@shc.sh" }]
+description = "Command line tool to manage WireGuard tunnels and peers"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Development Status :: 5 - Production/Stable",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: Implementation :: CPython"
+]
+dependencies = ["qrcode", "pydantic", "validators"]
+dynamic = ["version"]
+
+
+[project.scripts]
+wg-lazy = "wg_lazy:main"
+
+
+[project.optional-dependencies]
+none = []
+
+
+[tool.setuptools.dynamic]
+version = {attr = "wg_lazy.__version__"}
+
+
+[tool.pdm.dev-dependencies]
+all = [
+    "pytest",
+    "pytest-cov",
+    "pytest-mock",
+    "freezegun",
+    "ruff",
+    "mypy",
+    "bandit[toml]>=1.7.6",
+]
+
+
+[tool.pdm.scripts]
+# linting and style
+lint = "ruff check --fix"
+format = "ruff format"
+
+# testing
+test = "pytest --cov=wg_lazy tests/"
+coverage-xml = "pytest --cov=wg_lazy --cov-report=xml:cov.xml tests/"
+coverage-lcov = "pytest --cov=wg_lazy --cov-report=lcov:lcov.info tests/"
+coverage-html = { shell = """
+    pytest --cov=wg_lazy --cov-report=html tests/
+    xdg-open htmlcov/index.html 2>&1 > /dev/null
+"""}
+
+# code review
+review-lint = "ruff check"
+review-typing = "mypy ."
+review-format = "ruff format --check"
+review-tests = "pytest --cov=wg_lazy --cov-fail-under=75 tests/"
+review-security = "bandit -c pyproject.toml -r src"
+review = { composite = [
+    "review-tests",
+    "review-lint",
+    "review-typing",
+    "review-format",
+    "review-security"
+] }
+fix = { composite = ["format", "lint"] }
+
+
+[tool.ruff]
+line-length = 79
+pydocstyle = {convention = "google"}
+extend-select = ["D417"]
+select = [
+    # Pyflakes
+    "F",
+    # pycodestyle
+    "W",
+    "E",
+    # McCabe complexity
+    "C90",
+    # isort
+    "I",
+    # pep8-naming
+    "N",
+    # pydocstyle
+    "D",
+]
+
+
+[tool.ruff.isort]
+known-first-party = ["wg_lazy"]
+
+
+[tool.bandit]
+skips = ["B404"]

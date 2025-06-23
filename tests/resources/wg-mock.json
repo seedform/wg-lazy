@@ -1,0 +1,25 @@
+{
+  "PublicAddress": "127.0.0.1:51820",
+  "DNS": "1.1.1.1",
+  "Created": 1702269605,
+  "PrivateKey": "0OJDbbB2t3bYaHC3eKnsTgTsGC8eObiwrLX5ec3cxHc=",
+  "Address": "10.168.50.1/24",
+  "ListenPort": 51820,
+  "Peers": [
+    {
+      "PublicKey": "FNcSXh3/ukoV7JoXy0gMAG4TDti18JStaNfid2EGOFI=",
+      "PrivateKey": "YEMYDcsnqbDVRU77D7OSJHvXP5gEJwNoXqVJxTP802k=",
+      "PresharedKey": "RGUCzdC7mQF3vbtYMqUAYLjQa51I/N4uCNgoL2/y+yg=",
+      "AllowedIPs": "10.168.50.2/32",
+      "Name": "Phone",
+      "Added": 1609477199
+    },
+    {
+      "PublicKey": "P6sQl5YExB7inOezTLClm3wbXu4H+qcc9ZMJ8cDOh38=",
+      "PresharedKey": "3b2fMl7E1dh4T4QKGCRjPpJ45KqOaNgCzX3Ro30jHDU=",
+      "AllowedIPs": "10.168.50.3/32",
+      "Name": "Laptop",
+      "Added": 1704082740
+    }
+  ]
+}

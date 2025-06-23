@@ -1,0 +1,6 @@
+"""Limits for various checks."""
+
+TERM_MIN_COLMS = 80
+TERM_MIN_LINES = 40
+PEER_NAME_MIN_LEN = 1
+PEER_NAME_MAX_LEN = 40
